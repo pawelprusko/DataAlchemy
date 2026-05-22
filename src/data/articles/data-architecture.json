@@ -1,0 +1,10 @@
+{
+  "id": "1",
+  "title": "The Geometry of Silence: Why Empty State Design is the Alpha",
+  "slug": "geometry-of-silence",
+  "excerpt": "A deep dive into why your dashboard fails not because of the data it shows, but the data it doesn't allow to breathe.",
+  "content": "<p>Content goes here.</p>",
+  "category": "Data Architecture Scrolls",
+  "date": "2024-05-20T10:00:00Z",
+  "heroImageUrl": "https://images.unsplash.com/photo-1600132804564-964645228833?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+}
