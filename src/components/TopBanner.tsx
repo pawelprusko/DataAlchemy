@@ -1,20 +1,56 @@
+import React, { useMemo } from 'react';
 import { ArrowRight } from 'lucide-react';
 
 export default function TopBanner() {
+  const crystalPaths = useMemo(() => {
+    const r = (i: number, seed: number) => {
+      const fract = Math.sin(i * 13.412 + seed * 37.193) * 43758.5453;
+      return fract - Math.floor(fract);
+    };
+
+    const genPath = (seed: number, baseY: number, waveAmp: number, waveFreq: number, crystalScale: number, minXStep: number, maxXStep: number) => {
+      let path = `M 0 -50 L 1200 -50 `;
+      const points: {x: number, y: number}[] = [];
+      let x = 0;
+      let i = 0;
+      while (x < 1200) {
+        const wave = Math.sin(x * waveFreq + seed) * waveAmp;
+        const noise = (r(i, seed) - 0.5) * crystalScale;
+        const y = baseY + wave + noise;
+        points.push({ x, y });
+        
+        x += minXStep + r(i, seed + 1) * (maxXStep - minXStep);
+        i++;
+      }
+      
+      const lastWave = Math.sin(1200 * waveFreq + seed) * waveAmp;
+      const lastNoise = (r(i, seed) - 0.5) * crystalScale;
+      points.push({ x: 1200, y: baseY + lastWave + lastNoise });
+      
+      points.reverse().forEach(p => {
+        path += `L ${p.x.toFixed(1)} ${p.y.toFixed(1)} `;
+      });
+      path += "Z";
+      return path;
+    };
+
+    return [
+      genPath(15, 110, 35, 0.008, 25, 15, 35),
+      genPath(42, 80, 25, 0.008, 20, 20, 45),
+      genPath(88, 55, 15, 0.008, 15, 25, 55),
+    ];
+  }, []);
+
   return (
     <div className="relative pt-6 pb-4 -mt-[80px]">
       {/* Background shape */}
       <div className="absolute top-0 left-0 right-0 w-full z-0">
         <div className="h-[110px] w-full bg-primary" />
         <div className="w-full leading-none -mt-[2px]">
-          <svg fill="var(--color-primary)" viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-24 md:h-32 block overflow-visible">
-            <defs>
-              <filter id="hand-drawn-top" x="-20%" y="-20%" width="140%" height="140%">
-                <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="1" result="noise" />
-                <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" />
-              </filter>
-            </defs>
-            <path filter="url(#hand-drawn-top)" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V-50H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+          <svg fill="var(--color-primary)" viewBox="0 0 1200 160" preserveAspectRatio="none" className="w-full h-24 md:h-32 block drop-shadow-md">
+            <path opacity="0.3" d={crystalPaths[0]} />
+            <path opacity="0.6" d={crystalPaths[1]} />
+            <path d={crystalPaths[2]} />
           </svg>
         </div>
       </div>
