@@ -25,17 +25,12 @@ export default function Header() {
       }`}
     >
       <div className="flex items-center gap-2">
-        <img src="/assets/logo.svg" alt="Logo" className="w-auto h-32" />
+        <img src="/assets/logo.svg" alt="Logo" className="w-auto h-16" />
        
       </div>
       
       <div className="flex items-center gap-5">
-        <button className="text-white hover:text-primary transition-colors">
-          <Search size={18} strokeWidth={2} />
-        </button>
-        <button className="text-white hover:text-primary transition-colors">
-          <Sun size={18} strokeWidth={2} />
-        </button>
+        
         <button className="text-white hover:text-primary transition-colors ml-1">
           <Menu size={22} strokeWidth={2} />
         </button>
