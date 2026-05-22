@@ -3,9 +3,15 @@ import { ArrowRight, Twitter, Github, Linkedin, Rss, Sun, Search, Volume2 } from
 export default function Footer() {
   return (
     <footer className="relative mt-32 bg-primary text-white overflow-hidden pt-36 pb-12 px-6">
-      <div className="absolute top-0 left-0 right-0 w-full overflow-hidden leading-none">
-        <svg fill="#2C2C2C" viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-24 md:h-32">
-          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
+      <div className="absolute -top-[2px] left-0 right-0 w-full leading-none">
+        <svg fill="var(--color-background)" viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-24 md:h-32 block overflow-visible">
+          <defs>
+            <filter id="hand-drawn-bottom" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.008 0.008" numOctaves="1" result="noise" />
+              <feDisplacementMap in="SourceGraphic" in2="noise" scale="12" xChannelSelector="R" yChannelSelector="G" />
+            </filter>
+          </defs>
+          <path filter="url(#hand-drawn-bottom)" d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V-50H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"></path>
         </svg>
       </div>
 

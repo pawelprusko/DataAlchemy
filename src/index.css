@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Playpen+Sans:wght@100..800&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -8,8 +9,8 @@
   --color-text-main: #F3F4F6;
   --color-text-muted: #9CA3AF;
   
-  --font-sans: "Inter", sans-serif;
-  --font-heading: "Outfit", sans-serif;
+  --font-sans: "Playpen Sans", cursive, sans-serif;
+  --font-heading: "Playpen Sans", cursive, sans-serif;
 }
 
 body {
