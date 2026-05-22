@@ -25,8 +25,8 @@ export default function Header() {
       }`}
     >
       <div className="flex items-center gap-2">
-        <img src="/assets/logo.svg" alt="Logo" className="w-8 h-8" />
-        <span className="font-heading text-sm font-semibold tracking-[0.1em] text-white">Codex.</span>
+        <img src="/assets/logo.svg" alt="Logo" className="w-auto h-32" />
+       
       </div>
       
       <div className="flex items-center gap-5">
