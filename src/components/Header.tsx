@@ -25,7 +25,7 @@ export default function Header() {
       }`}
     >
       <div className="flex items-center gap-2">
-        <img src="/assets/logo.svg" alt="Logo" className="w-auto h-16" />
+        <img src="/assets/logo.svg" alt="Logo" className="w-auto h-8" />
        
       </div>
       
