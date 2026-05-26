@@ -6,8 +6,9 @@
   --color-primary: #816CFF;
   --color-secondary: #EFC88B;
   --color-tertiary: #BDFFEA;
-  --color-text-main: #F3F4F6;
-  --color-text-muted: #9CA3AF;
+  --color-text-main: #F3EFE9;
+  --color-text-muted: #A39E93;
+  --color-text-darker: #555451;
   
   --font-sans: "Inter", sans-serif;
   --font-heading: "Playfair Display", serif;

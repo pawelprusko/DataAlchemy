@@ -26,36 +26,41 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-background font-sans selection:bg-primary/30 selection:text-white">
+    <div className="min-h-screen bg-background font-sans selection:bg-primary/30 selection:text-text-main">
       <Header />
 
       <main className="max-w-3xl mx-auto px-6 pt-16 pb-32">
         {/* Section 1: Current Focus Log */}
         <section className="mb-12">
-          <h2 className="text-xs font-mono tracking-widest text-text-muted mb-3 uppercase">Status</h2>
+          <h2 className="text-xs font-mono tracking-widest text-text-muted mb-4 uppercase">Projects Status</h2>
           <div className="text-sm text-text-main/80 font-mono leading-relaxed">
-            <span className="font-bold text-white">[ {getMonthYear()} ]</span> — Obecnie pracuję nad ewaluacją nowych modeli generatywnych do analizy zbiorów danych oraz prototypuję interfejsy wizualizacji (Vibe Prototyping) dla branży energetycznej.
+            <span className="font-bold text-secondary">[ {getMonthYear()} ]</span> — Obecnie pracuję nad ewaluacją nowych modeli generatywnych do analizy zbiorów danych oraz prototypuję interfejsy wizualizacji (Vibe Prototyping) dla branży energetycznej.
           </div>
         </section>
 
         {/* Section 2: AI Advocate Tip */}
-        <section className="mb-20 py-5 px-6 border-l-2 border-tertiary">
-          <h2 className="text-xs font-mono tracking-widest text-tertiary mb-3 flex items-center gap-2 uppercase">
-            <span className="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse shadow-[0_0_8px_rgba(189,255,234,0.6)]"></span>
-            AI Advocate Tip
+        <section className="mb-20 py-4 px-6 border-l-2 border-primary bg-primary/5">
+          <h2 className="text-xs font-mono tracking-widest text-primary mb-4 flex items-center gap-2 uppercase">
+            <span className="text-lg leading-none">&gt;_</span>
+            Dataviz AI Advocate Tip
           </h2>
-          <p className="text-sm text-text-main/90 font-mono leading-relaxed">
-            <span className="text-tertiary mr-2">&gt;_</span> Zawsze zaczynaj od zdefiniowania schematu JSON dla danych wyjściowych, gdy prosisz LLM o formatowanie. Zmniejsza to o 80% konieczność ręcznego czyszczenia kodu w komponentach D3 lub Recharts.
+          <p className="text-sm text-text-main font-mono leading-relaxed mb-4">
+            Zawsze zaczynaj od zdefiniowania schematu JSON dla danych wyjściowych, gdy prosisz LLM o formatowanie. Zmniejsza to o 80% konieczność ręcznego czyszczenia kodu w komponentach D3 lub Recharts.
           </p>
+          <div className="flex items-center gap-3">
+            <a href="#" className="group inline-flex items-center">
+              <span className="text-sm font-semibold tracking-wide text-primary border-b border-primary/30 pb-0.5 group-hover:border-primary/80 group-hover:text-primary/80 transition-all">Check It</span>
+            </a>
+          </div>
         </section>
 
         {/* Section 3: The Hero Article */}
         {heroArticle && (
           <section className="mb-24 group cursor-pointer block">
-            <div className="relative aspect-square w-full overflow-hidden bg-white/5 mb-8">
+            <div className="relative aspect-square w-full overflow-hidden bg-text-darker/20 mb-8">
               <div className="absolute inset-0 bg-gradient-to-t from-background via-black/20 to-transparent z-10" />
               {/* Artifact Effect overlay */}
-              <div className="absolute inset-0 mix-blend-overlay opacity-30 z-10" style={{ backgroundImage: 'radial-gradient(circle, #fff 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
+              <div className="absolute inset-0 mix-blend-overlay opacity-30 z-10" style={{ backgroundImage: 'radial-gradient(circle, #F3EFE9 1px, transparent 1px)', backgroundSize: '24px 24px' }}></div>
               <img
                 src={heroArticle.heroImageUrl}
                 alt={heroArticle.title}
@@ -63,14 +68,14 @@ export default function Home() {
               />
             </div>
             
-            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-white mb-6 leading-tight group-hover:text-primary transition-colors duration-500">
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-6xl text-text-main mb-6 leading-tight group-hover:text-secondary transition-colors duration-500">
               {heroArticle.title}
             </h1>
             <p className="text-lg text-text-muted leading-relaxed font-serif mb-6 line-clamp-3">
               {heroArticle.excerpt}
             </p>
             <div className="flex items-center gap-3">
-              <span className="text-sm font-semibold tracking-wide text-white border-b border-white/30 pb-0.5 group-hover:border-primary group-hover:text-primary transition-all">Czytaj dalej</span>
+              <span className="text-sm font-semibold tracking-wide text-text-main border-b border-text-main/30 pb-0.5 group-hover:border-secondary group-hover:text-secondary transition-all">Czytaj dalej</span>
             </div>
           </section>
         )}
@@ -78,21 +83,20 @@ export default function Home() {
         {/* Section 4: Recent Archive */}
         {recentArticles.length > 0 && (
           <section className="mb-24">
-            <h2 className="text-xs font-mono tracking-widest text-text-muted mb-8 uppercase flex items-center gap-4">
-              Ostatnie Archiwum
-              <div className="flex-1 h-[1px] bg-white/10" />
+            <h2 className="text-xs font-mono tracking-widest text-text-muted mb-6 uppercase">
+              Last Articles
             </h2>
             <div className="flex flex-col gap-6">
               {recentArticles.map((article) => (
-                <article key={article.id} className="group cursor-pointer flex flex-col md:flex-row gap-2 md:gap-8 items-baseline py-4 border-b border-white/5 last:border-0 hover:bg-white/[0.02] -mx-4 px-4 transition-colors">
-                  <div className="w-32 flex-shrink-0 text-xs font-mono text-text-muted/60">
+                <article key={article.id} className="group cursor-pointer flex flex-col md:flex-row gap-2 md:gap-8 items-baseline py-4 border-b border-text-darker/40 last:border-0 hover:bg-black/10 -mx-4 px-4 transition-colors rounded-lg">
+                  <div className="w-32 flex-shrink-0 text-xs font-mono text-text-muted">
                     24 Maj 2026
                   </div>
                   <div className="flex-1">
-                    <h3 className="font-heading text-xl text-white/90 group-hover:text-primary transition-colors mb-2">
+                    <h3 className="font-heading text-xl text-text-main group-hover:text-secondary transition-colors mb-2">
                       {article.title}
                     </h3>
-                    <div className="flex items-center gap-3 text-xs font-mono uppercase text-secondary">
+                    <div className="flex items-center gap-3 text-xs font-mono uppercase text-secondary group-hover:text-secondary/80 transition-colors">
                       {article.category}
                     </div>
                   </div>
@@ -104,11 +108,10 @@ export default function Home() {
 
         {/* Section 5: Categories as Accordions */}
         <section className="mb-32">
-          <h2 className="text-xs font-mono tracking-widest text-text-muted mb-8 uppercase flex items-center gap-4">
-            Wolumeny
-            <div className="flex-1 h-[1px] bg-white/10" />
+          <h2 className="text-xs font-mono tracking-widest text-text-muted mb-6 uppercase">
+            Article Genres
           </h2>
-          <div className="flex flex-col divide-y divide-white/10 border-y border-white/10">
+          <div className="flex flex-col divide-y divide-text-darker/40 border-y border-text-darker/40">
             {CATEGORIES.map((cat) => {
               const isExpanded = expandedCategory === cat.id;
               return (
@@ -117,18 +120,18 @@ export default function Home() {
                     onClick={() => setExpandedCategory(isExpanded ? null : cat.id)}
                     className="flex items-baseline md:items-center py-6 text-left group gap-4 md:gap-8"
                   >
-                    <span className="font-heading text-4xl font-light text-white/10 group-hover:text-white/30 transition-colors w-16 flex-shrink-0 italic">
+                    <span className="font-heading text-4xl font-light text-text-muted/60 group-hover:text-text-muted/30 transition-colors w-16 flex-shrink-0 italic">
                       {cat.number}
                     </span>
                     <div className="flex-1">
-                      <h3 className="font-heading text-2xl text-white/90 group-hover:text-primary transition-colors">
+                      <h3 className="font-heading text-2xl text-secondary group-hover:text-secondary/70 transition-colors">
                         {cat.title}
                       </h3>
-                      <p className="text-sm font-sans text-text-muted mt-1 opacity-60">
+                      <p className="text-sm font-sans text-text-muted mt-1">
                         {cat.desc}
                       </p>
                     </div>
-                    <span className="text-white/30 group-hover:text-white transition-colors text-2xl font-light font-sans">
+                    <span className="text-text-main/30 group-hover:text-text-main transition-colors text-2xl font-light font-sans">
                       {isExpanded ? '−' : '+'}
                     </span>
                   </button>
@@ -137,8 +140,8 @@ export default function Home() {
                       <div className="flex flex-col gap-4 text-sm font-sans">
                         {articles.slice(0, 3).map((article, i) => (
                           <a key={i} href="#" className="flex flex-col gap-1 py-3 group/link">
-                            <span className="font-heading text-lg text-white/80 group-hover/link:text-secondary transition-colors">{article.title}</span>
-                            <span className="text-text-muted/60 line-clamp-1">{article.excerpt}</span>
+                            <span className="font-heading text-lg text-text-main/90 group-hover/link:text-secondary transition-colors">{article.title}</span>
+                            <span className="text-text-muted line-clamp-1">{article.excerpt}</span>
                           </a>
                         ))}
                       </div>
@@ -156,7 +159,7 @@ export default function Home() {
             <p>
               Pomagam organizacjom lepiej rozumieć ich dane poprzez architekturę informacji oraz wizualne eksperymenty. 
               Moja kooperacja opiera się na audytach systemów analitycznych, konsultacjach infrastruktury, wewnętrznych warsztatach oraz 
-              bezpośredniej pracy projektowej z zespołami inżynieryjnymi w modelu <span className="text-white font-medium">Vibe Prototyping</span>.
+              bezpośredniej pracy projektowej z zespołami inżynieryjnymi w modelu <span className="text-text-main font-medium">Vibe Prototyping</span>.
               Jeśli potrzebujesz kogoś, kto połączy twarde inżynierstwo danych z ludzką narracją wizualną, znajdziesz mnie w sieci.
             </p>
           </div>
@@ -164,13 +167,13 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 py-12 px-6">
+      <footer className="border-t border-text-darker/30 py-12 px-6">
         <div className="max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="font-heading font-medium text-white/60">Data Alchemist © {new Date().getFullYear()}</div>
+          <div className="font-heading font-medium text-text-main/60">Data Alchemist © {new Date().getFullYear()}</div>
           <div className="flex gap-6">
-            <a href="#" className="font-mono text-sm text-text-muted hover:text-white transition-colors">LinkedIn</a>
-            <a href="#" className="font-mono text-sm text-text-muted hover:text-white transition-colors">Twitter</a>
-            <a href="#" className="font-mono text-sm text-text-muted hover:text-white transition-colors">Github</a>
+            <a href="#" className="font-mono text-sm text-text-muted hover:text-text-main transition-colors">LinkedIn</a>
+            <a href="#" className="font-mono text-sm text-text-muted hover:text-text-main transition-colors">Twitter</a>
+            <a href="#" className="font-mono text-sm text-text-muted hover:text-text-main transition-colors">Github</a>
           </div>
         </div>
       </footer>

@@ -23,11 +23,11 @@ export default function Header() {
       }`}
     >
       <div className="flex items-center">
-        <span className="font-heading font-bold text-lg tracking-tight text-white/90">Data Alchemist</span>
+        <span className="font-heading font-bold text-lg tracking-tight text-text-main/90">Data Alchemist</span>
       </div>
       
       <div className="flex items-center">
-        <a href="#about" className="text-sm font-sans font-medium text-white/60 hover:text-white transition-colors">
+        <a href="#about" className="text-sm font-sans font-medium text-text-main/60 hover:text-text-main transition-colors">
           About Me
         </a>
       </div>
