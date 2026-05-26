@@ -29,7 +29,7 @@ export default function Home() {
     <div className="min-h-screen bg-background font-sans selection:bg-primary/30 selection:text-text-main">
       <Header />
 
-      <main className="max-w-3xl mx-auto px-6 pt-16 pb-32">
+      <main className="max-w-3xl mx-auto px-6 pt-16 pb-20">
         {/* Section 1: Current Focus Log */}
         <section className="mb-12">
           <h2 className="text-xs font-mono tracking-widest text-text-muted mb-4 uppercase">Projects Status</h2>
@@ -39,7 +39,7 @@ export default function Home() {
         </section>
 
         {/* Section 2: AI Advocate Tip */}
-        <section className="mb-20 py-4 px-6 border-l-2 border-primary bg-primary/5">
+        <section className="mb-16 py-4 px-6 border-l-2 border-primary bg-primary/5">
           <h2 className="text-xs font-mono tracking-widest text-primary mb-4 flex items-center gap-2 uppercase">
             <span className="text-lg leading-none">&gt;_</span>
             Dataviz AI Advocate Tip
@@ -56,7 +56,7 @@ export default function Home() {
 
         {/* Section 3: The Hero Article */}
         {heroArticle && (
-          <section className="mb-24 group cursor-pointer block">
+          <section className="mb-20 group cursor-pointer block">
             <div className="relative aspect-square w-full overflow-hidden bg-text-darker/20 mb-8">
               <div className="absolute inset-0 bg-gradient-to-t from-background via-black/20 to-transparent z-10" />
               {/* Artifact Effect overlay */}
@@ -82,13 +82,13 @@ export default function Home() {
 
         {/* Section 4: Recent Archive */}
         {recentArticles.length > 0 && (
-          <section className="mb-24">
+          <section className="mb-20">
             <h2 className="text-xs font-mono tracking-widest text-text-muted mb-6 uppercase">
               Last Articles
             </h2>
             <div className="flex flex-col gap-6">
               {recentArticles.map((article) => (
-                <article key={article.id} className="group cursor-pointer flex flex-col md:flex-row gap-2 md:gap-8 items-baseline py-4 border-b border-text-darker/40 last:border-0 hover:bg-black/10 -mx-4 px-4 transition-colors rounded-lg">
+                <article key={article.id} className="group cursor-pointer flex flex-col md:flex-row gap-2 md:gap-8 items-baseline py-4 border-b border-text-darker/40 last:border-0 transition-colors">
                   <div className="w-32 flex-shrink-0 text-xs font-mono text-text-muted">
                     24 Maj 2026
                   </div>
@@ -107,7 +107,7 @@ export default function Home() {
         )}
 
         {/* Section 5: Categories as Accordions */}
-        <section className="mb-32">
+        <section className="mb-20">
           <h2 className="text-xs font-mono tracking-widest text-text-muted mb-6 uppercase">
             Article Genres
           </h2>
@@ -154,7 +154,7 @@ export default function Home() {
         </section>
 
         {/* Section 6: Services (Anti-Sales) */}
-        <section className="mb-16">
+        <section className="mb-0">
           <div className="text-text-muted font-sans leading-relaxed text-[15px]">
             <p>
               Pomagam organizacjom lepiej rozumieć ich dane poprzez architekturę informacji oraz wizualne eksperymenty. 
