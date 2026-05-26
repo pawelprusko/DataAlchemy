@@ -56,25 +56,44 @@ export default function TopBanner() {
       </div>
 
       <div className="mx-5 mb-8 mt-[240px] relative isolate z-10">
-        <div className="relative isolate overflow-hidden rounded-2xl bg-[#EFC88B] px-6 pt-8 pb-6 shadow-xl w-full border-[3px] border-dashed border-[#816CFF] text-[#2C2C2C] max-w-lg mx-auto">
-          {/* Flower emoji equivalent */}
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-xl">🌸</span>
-            <span className="font-heading font-bold text-lg text-primary">It's the Spring Sale!</span>
-          </div>
+        <div className="relative isolate overflow-hidden rounded-2xl bg-white/5 backdrop-blur-sm px-6 pt-8 pb-8 shadow-2xl w-full border border-white/10 text-white max-w-5xl mx-auto flex flex-col lg:flex-row gap-8 items-center">
           
-          <p className="font-sans text-[15px] font-medium leading-relaxed mb-6">
-            For a limited time, you can launch your next vision with massive clarity using our flagship service, <span className="underline decoration-2 underline-offset-4 font-bold text-primary">Vibe Prototyping</span>.
-            <br /><br />
-            I know finding the right aesthetic is hard, but we only accept 2 clients a month. This is a rare chance to snag a slot. 😄
-          </p>
+          <div className="w-full lg:w-1/2 aspect-video rounded-xl overflow-hidden bg-black/40 shadow-inner border border-white/10">
+            <iframe 
+              width="100%" 
+              height="100%" 
+              src="https://www.youtube.com/embed/sBLOYQ-W_Kw" 
+              title="YouTube video player" 
+              frameBorder="0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+              referrerPolicy="strict-origin-when-cross-origin" 
+              allowFullScreen
+              className="w-full h-full object-cover"
+            ></iframe>
+          </div>
 
-          <button className="w-full bg-[#2C2C2C] text-[#F3F4F6] py-3.5 px-4 rounded-xl flex items-center justify-between hover:bg-[#1A1A1A] transition-colors group border-2 border-transparent">
-            <span className="font-sans font-bold text-sm tracking-wide">Learn More</span>
-            <div className="bg-[#4a4a4a] p-1.5 rounded-lg group-hover:bg-primary transition-colors">
-              <ArrowRight size={16} className="text-white" />
+          <div className="w-full lg:w-1/2 flex flex-col items-start gap-5">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-xl">✨</span>
+              <span className="font-heading font-bold text-lg text-primary">Discover the Magic</span>
             </div>
-          </button>
+            
+            <h2 className="text-3xl md:text-5xl font-heading font-bold text-white leading-tight">
+              Data Alchemy in Action
+            </h2>
+            
+            <p className="font-sans text-[16px] text-gray-300 font-medium leading-relaxed">
+              Transform raw information into golden insights. Watch how our process distills complexity into clear, actionable visualizations that drive your narrative forward.
+            </p>
+
+            <button className="mt-4 bg-primary hover:bg-primary/90 text-white py-3.5 px-6 rounded-xl flex items-center gap-4 transition-colors group shadow-lg">
+              <span className="font-sans font-bold text-sm tracking-wide">Dataviz AI Advocate</span>
+              <div className="bg-white/20 p-1.5 rounded-lg group-hover:bg-white/30 transition-colors">
+                <ArrowRight size={16} className="text-white" />
+              </div>
+            </button>
+          </div>
+
         </div>
       </div>
     </div>

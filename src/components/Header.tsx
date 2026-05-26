@@ -1,4 +1,3 @@
-import { Menu, Search, Sun } from 'lucide-react';
 import { useState, useEffect } from 'react';
 
 export default function Header() {
@@ -9,7 +8,6 @@ export default function Header() {
       setScrolled(window.scrollY > 30);
     };
     
-    // Check initial position
     handleScroll();
     
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -18,22 +16,20 @@ export default function Header() {
 
   return (
     <header 
-      className={`px-5 py-4 flex items-center justify-between sticky top-0 z-40 transition-colors duration-300 ${
+      className={`px-6 py-5 flex items-center justify-between sticky top-0 z-40 transition-colors duration-300 ${
         scrolled 
-          ? 'bg-background/80 backdrop-blur-xl border-b border-white/5 saturate-150' 
-          : 'bg-primary border-b border-transparent'
+          ? 'bg-background/90 backdrop-blur-md border-b border-white/5' 
+          : 'bg-background border-b border-transparent'
       }`}
     >
-      <div className="flex items-center gap-2">
-        <img src="/assets/logo.svg" alt="Logo" className="w-auto h-10" />
-       
+      <div className="flex items-center">
+        <span className="font-heading font-bold text-lg tracking-tight text-white/90">Data Alchemist</span>
       </div>
       
-      <div className="flex items-center gap-5">
-        
-        <button className="text-white hover:text-primary transition-colors ml-1">
-          <Menu size={22} strokeWidth={2} />
-        </button>
+      <div className="flex items-center">
+        <a href="#about" className="text-sm font-sans font-medium text-white/60 hover:text-white transition-colors">
+          About Me
+        </a>
       </div>
     </header>
   );
