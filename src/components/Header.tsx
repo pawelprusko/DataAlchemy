@@ -19,7 +19,7 @@ export default function Header({ categoryTitle }: { categoryTitle?: string }) {
 
   return (
     <header 
-      className={`sticky top-0 z-40 transition-colors duration-300 w-full ${
+      className={`sticky top-0 z-40 transition-colors duration-300 w-full pt-[max(env(safe-area-inset-top),_0px)] ${
         scrolled 
           ? 'bg-background/90 backdrop-blur-md border-b border-white/5' 
           : 'bg-background border-b border-transparent'

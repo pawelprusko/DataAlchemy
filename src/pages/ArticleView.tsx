@@ -94,7 +94,7 @@ export default function ArticleView() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-text-darker/30 py-12 px-6">
+      <footer className="border-t border-text-darker/30 pt-12 pb-[max(env(safe-area-inset-bottom),_3rem)] px-6">
         <div className="max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="font-heading font-medium text-text-main/60">Data Alchemist © {new Date().getFullYear()}</div>
           <div className="flex gap-6">
