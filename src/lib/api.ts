@@ -13,12 +13,27 @@ export interface Article {
 
 export function getLatestArticles(): Article[] {
   // Read local JSON files using Vite's fast glob
-  const files = import.meta.glob('/src/data/articles/*.json', { eager: true });
+  const files = import.meta.glob('/src/articles/*/*/article.json', { eager: true });
+  const images = import.meta.glob('/src/articles/*/*/hero.png', { eager: true, query: '?url', import: 'default' }) as Record<string, string>;
+  
   const articles: Article[] = [];
 
   for (const path in files) {
-    const file = files[path] as { default: Article } | Article;
-    articles.push('default' in file ? file.default : file);
+    const file = files[path] as { default: any };
+    const articleData = file.default;
+    
+    // Extract category and slug folder name from path: /src/articles/category-name/article-slug/article.json
+    const parts = path.split('/');
+    const slugFolder = parts[parts.length - 2];
+    const categoryFolder = parts[parts.length - 3];
+    
+    const imagePath = `/src/articles/${categoryFolder}/${slugFolder}/hero.png`;
+    const heroImageUrl = images[imagePath] || '';
+
+    articles.push({
+      ...articleData,
+      heroImageUrl
+    });
   }
 
   // Sort by date descending
