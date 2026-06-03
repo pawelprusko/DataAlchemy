@@ -26,25 +26,31 @@ export default function Footer() {
   };
 
   const handleToggleNotification = async () => {
-    if (!('Notification' in window)) {
-      showToast('Notifications not supported');
-      return;
-    }
+    const newPref = !notificationsEnabled;
     
-    if (Notification.permission === 'granted') {
-      const newPref = !notificationsEnabled;
-      setNotificationsEnabled(newPref);
-      localStorage.setItem('notifications_opt_in', newPref ? 'true' : 'false');
-      
-      showToast(newPref ? 'Alerts Activated' : 'Alerts Deactivated');
-    } else if (Notification.permission !== 'denied') {
-      const permission = await Notification.requestPermission();
-      if (permission === 'granted') {
-        setNotificationsEnabled(true);
-        localStorage.setItem('notifications_opt_in', 'true');
-        showToast('Alerts Activated');
-        
-        if ('serviceWorker' in navigator) {
+    // Always toggle visual state to avoid blocking the prototype experience
+    setNotificationsEnabled(newPref);
+    localStorage.setItem('notifications_opt_in', newPref ? 'true' : 'false');
+    showToast(newPref ? 'Notifications Activated' : 'Notifications Deactivated');
+
+    // Attempt actual browser notification subscription if turning on
+    if (newPref && 'Notification' in window) {
+      if (Notification.permission !== 'granted' && Notification.permission !== 'denied') {
+        try {
+          const permission = await Notification.requestPermission();
+          if (permission === 'granted' && 'serviceWorker' in navigator) {
+            navigator.serviceWorker.ready.then((registration) => {
+              registration.showNotification('Data Alchemist', {
+                body: 'You are now subscribed to weekly alerts.',
+                icon: '/icon-192x192.png',
+                badge: '/icon-192x192.png'
+              });
+            });
+          }
+        } catch (e) {
+          console.error("Could not request notification permission", e);
+        }
+      } else if (Notification.permission === 'granted' && 'serviceWorker' in navigator) {
           navigator.serviceWorker.ready.then((registration) => {
             registration.showNotification('Data Alchemist', {
               body: 'You are now subscribed to weekly alerts.',
@@ -52,12 +58,7 @@ export default function Footer() {
               badge: '/icon-192x192.png'
             });
           });
-        }
-      } else {
-        showToast('Permission Denied');
       }
-    } else {
-      showToast('Notifications Blocked in Browser');
     }
   };
 
@@ -111,7 +112,7 @@ export default function Footer() {
                       <span className="w-2.5 h-2.5 bg-text-main rounded-sm" />
                     )}
                   </div>
-                  <span className={`font-mono text-sm leading-relaxed transition-colors ${notificationsEnabled ? 'text-text-main' : 'text-text-main/70 group-hover:text-text-main'}`}>
+                  <span className={`font-mono text-sm leading-relaxed whitespace-normal break-words transition-colors ${notificationsEnabled ? 'text-text-main' : 'text-text-main/70 group-hover:text-text-main'}`}>
                     Notify me of new weekly articles
                   </span>
                 </button>
