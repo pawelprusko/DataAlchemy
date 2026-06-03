@@ -29,6 +29,11 @@ export default function App() {
 
       nudgeLayout();
       setTimeout(nudgeLayout, 500);
+
+      // Hide splash screen after app mounts
+      setTimeout(() => {
+        document.body.classList.add('app-loaded');
+      }, 300); // Small delay to let the UI settle
   }, []);
 
   return (
