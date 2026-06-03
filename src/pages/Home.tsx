@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import Header from '../components/Header';
+import Footer from '../components/Footer';
 import { getLatestArticles } from '../lib/api';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -173,15 +174,7 @@ export default function Home() {
         </section>
       </main>
 
-      {/* Footer */}
-      <footer className="border-t border-text-darker/30 pt-12 pb-[max(env(safe-area-inset-bottom),_3rem)] px-6">
-        <div className="max-w-3xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="font-heading font-medium text-text-main/60">Data Alchemist © {new Date().getFullYear()}</div>
-          <div className="flex gap-6">
-            <a href="https://www.linkedin.com/in/pawelprusko/" target="_blank" rel="noopener noreferrer" className="font-mono text-sm text-text-muted hover:text-text-main transition-colors">LinkedIn</a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

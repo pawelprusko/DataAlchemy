@@ -1,115 +1,143 @@
-import React, { useMemo } from 'react';
-import { ArrowRight, Twitter, Github, Linkedin, Rss, Sun, Search, Volume2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function Footer() {
-  const crystalPaths = useMemo(() => {
-    const r = (i: number, seed: number) => {
-      const fract = Math.sin(i * 13.412 + seed * 37.193) * 43758.5453;
-      return fract - Math.floor(fract);
-    };
+  const [expanded, setExpanded] = useState(false);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-    const genPath = (seed: number, baseY: number, waveAmp: number, waveFreq: number, crystalScale: number, minXStep: number, maxXStep: number) => {
-      let path = `M 0 -50 L 1200 -50 `;
-      const points: {x: number, y: number}[] = [];
-      let x = 0;
-      let i = 0;
-      while (x < 1200) {
-        const wave = Math.sin(x * waveFreq + seed) * waveAmp;
-        const noise = (r(i, seed) - 0.5) * crystalScale;
-        const y = baseY + wave + noise;
-        points.push({ x, y });
-        
-        x += minXStep + r(i, seed + 1) * (maxXStep - minXStep);
-        i++;
+  useEffect(() => {
+    if ('Notification' in window && Notification.permission === 'granted') {
+      const optIn = localStorage.getItem('notifications_opt_in');
+      if (optIn === 'true') {
+        setNotificationsEnabled(true);
       }
-      
-      const lastWave = Math.sin(1200 * waveFreq + seed) * waveAmp;
-      const lastNoise = (r(i, seed) - 0.5) * crystalScale;
-      points.push({ x: 1200, y: baseY + lastWave + lastNoise });
-      
-      points.reverse().forEach(p => {
-        path += `L ${p.x.toFixed(1)} ${p.y.toFixed(1)} `;
-      });
-      path += "Z";
-      return path;
-    };
-
-    return [
-      genPath(15, 110, 35, 0.008, 25, 15, 35),
-      genPath(42, 80, 25, 0.008, 20, 20, 45),
-      genPath(88, 55, 15, 0.008, 15, 25, 55),
-    ];
+    }
   }, []);
 
-  return (
-    <footer className="relative mt-32 bg-primary text-white overflow-hidden pt-36 pb-12 px-6">
-      <div className="absolute -top-[2px] left-0 right-0 w-full leading-none">
-        <svg fill="var(--color-background)" viewBox="0 0 1200 160" preserveAspectRatio="none" className="w-full h-24 md:h-32 block drop-shadow-md">
-          <path opacity="0.3" d={crystalPaths[0]} />
-          <path opacity="0.6" d={crystalPaths[1]} />
-          <path d={crystalPaths[2]} />
-        </svg>
-      </div>
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    if (toastTimeoutRef.current) {
+      clearTimeout(toastTimeoutRef.current);
+    }
+    toastTimeoutRef.current = setTimeout(() => {
+      setToastMessage(null);
+    }, 4000);
+  };
 
-      <div className="max-w-md mx-auto">
-        <div className="flex items-center gap-2 mb-2">
-          <img src="/assets/logo.svg" alt="Logo" className="w-8 h-8" />
-          <span className="font-heading text-2xl font-semibold text-white">Codex.</span>
-        </div>
+  const handleToggleNotification = async () => {
+    if (!('Notification' in window)) {
+      showToast('Notifications not supported');
+      return;
+    }
+    
+    if (Notification.permission === 'granted') {
+      const newPref = !notificationsEnabled;
+      setNotificationsEnabled(newPref);
+      localStorage.setItem('notifications_opt_in', newPref ? 'true' : 'false');
+      
+      showToast(newPref ? 'Alerts Activated' : 'Alerts Deactivated');
+    } else if (Notification.permission !== 'denied') {
+      const permission = await Notification.requestPermission();
+      if (permission === 'granted') {
+        setNotificationsEnabled(true);
+        localStorage.setItem('notifications_opt_in', 'true');
+        showToast('Alerts Activated');
         
-        <p className="font-sans font-bold text-sm mb-10 flex items-center gap-1 text-white">
-          You are a rockstar. <span className="text-xl">🌟</span>
-        </p>
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.ready.then((registration) => {
+            registration.showNotification('Data Alchemist', {
+              body: 'You are now subscribed to weekly alerts.',
+              icon: '/icon-192x192.png',
+              badge: '/icon-192x192.png'
+            });
+          });
+        }
+      } else {
+        showToast('Permission Denied');
+      }
+    } else {
+      showToast('Notifications Blocked in Browser');
+    }
+  };
 
-        <p className="font-sans font-medium text-sm mb-3 text-white/90">
-          Want to know when I publish new content? <br />
-          Enter your email to join my free newsletter:
-        </p>
-
-        <form className="flex w-full mb-12 shadow-lg rounded-xl overflow-hidden" onSubmit={(e) => e.preventDefault()}>
-          <input
-            type="email"
-            placeholder="anna@aol.com"
-            className="w-full bg-[#2C2C2C] px-4 py-3 text-[14px] focus:outline-none text-white placeholder:text-white/40 border border-white/10 border-r-0 rounded-l-xl"
-          />
-          <button type="submit" className="px-5 bg-primary text-white hover:bg-[#6c59d9] transition-colors flex items-center justify-center rounded-r-xl">
-            <ArrowRight size={20} />
+  return (
+    <footer className="border-t border-text-darker/30 pt-12 pb-[max(env(safe-area-inset-bottom),_3rem)] px-6 relative">
+      <div className="max-w-3xl mx-auto flex flex-col gap-12">
+        {/* App & Notifications */}
+        <div className="border border-text-darker/30 p-6 rounded-sm bg-background transition-colors duration-300 relative overflow-hidden">
+          <button 
+             onClick={() => setExpanded(!expanded)}
+             className="w-full text-left flex flex-col gap-2 focus:outline-none"
+          >
+             <div className="flex justify-between items-center w-full">
+                <span className="font-heading tracking-widest text-xs uppercase text-secondary">App & Notifications</span>
+                <span className="text-text-muted font-mono">{expanded ? '−' : '+'}</span>
+             </div>
+             {!expanded && (
+               <p className="text-[15px] font-sans text-text-muted leading-relaxed mt-2">
+                 Read Data Alchemist in full-screen mode and get a single alert when the weekly article drops. No browser clutter, zero spam.
+               </p>
+             )}
           </button>
-        </form>
+          
+          {expanded && (
+            <div className="mt-8 flex flex-col gap-8 animate-fade-in border-t border-text-darker/20 pt-8">
+              {/* Section A: App */}
+              <div className="flex flex-col gap-3">
+                <h3 className="font-heading font-medium text-text-main text-lg">Launch from your Home Screen</h3>
+                <p className="text-[15px] font-sans text-text-muted leading-relaxed">
+                  Bypass the browser entirely. Saving the app opens Data Alchemist instantly in a distraction-free, full-screen mode.
+                </p>
+                <ul className="text-sm font-mono text-text-muted mt-2 space-y-2 list-none">
+                  <li className="flex gap-2"><span className="text-secondary">-</span> iOS: Tap the Share icon in Safari, then select Add to Home Screen.</li>
+                  <li className="flex gap-2"><span className="text-secondary">-</span> Android: Click Add to Workspace</li>
+                </ul>
+              </div>
 
-        <div className="grid grid-cols-2 gap-y-4 gap-x-8 mb-16 font-sans text-sm font-semibold">
-          <div className="col-span-1 text-xs text-white/30 mb-1">INTERACTIVE COURSES</div>
-          <div className="col-span-1 text-xs text-white/30 mb-1 text-right">GENERAL</div>
-
-          <div className="col-span-1 hover:text-primary cursor-pointer transition-colors text-white/80">Data Architecture</div>
-          <div className="col-span-1 text-right hover:text-primary cursor-pointer transition-colors text-white/80">About Author</div>
-
-          <div className="col-span-1 hover:text-primary cursor-pointer transition-colors text-white/80">The Zen of Data</div>
-          <div className="col-span-1 text-right hover:text-primary cursor-pointer transition-colors text-white/80">About This Codex</div>
-
-          <div className="col-span-1 hover:text-primary cursor-pointer transition-colors text-white/80">UI Micro-interactions</div>
-          <div className="col-span-1 text-right hover:text-primary cursor-pointer transition-colors text-white/80">Contact</div>
+              {/* Section B: Notifications */}
+              <div className="flex flex-col gap-3">
+                <h3 className="font-heading font-medium text-text-main text-lg">Weekly Alerts</h3>
+                <p className="text-[15px] font-sans text-text-muted leading-relaxed">
+                  Would you like to be notified when a new article is published? I publish exactly once a week. You will receive one direct notification, nothing more.
+                </p>
+                
+                <button 
+                  onClick={handleToggleNotification}
+                  className="flex items-start gap-4 mt-4 w-full cursor-pointer group focus:outline-none text-left"
+                >
+                  <div className={`relative flex-shrink-0 flex items-center justify-center w-5 h-5 border rounded-sm transition-colors mt-[2px] ${notificationsEnabled ? 'border-text-main bg-text-main/10' : 'border-text-main/50 bg-background group-hover:border-text-main'}`}>
+                    {notificationsEnabled && (
+                      <span className="w-2.5 h-2.5 bg-text-main rounded-sm" />
+                    )}
+                  </div>
+                  <span className={`font-mono text-sm leading-relaxed transition-colors ${notificationsEnabled ? 'text-text-main' : 'text-text-main/70 group-hover:text-text-main'}`}>
+                    Notify me of new weekly articles
+                  </span>
+                </button>
+              </div>
+            </div>
+          )}
         </div>
 
-        <div className="flex justify-between items-center px-2 mb-8 text-white/60">
-          <Search size={22} className="cursor-pointer hover:text-primary transition-colors" />
-          <Volume2 size={22} className="cursor-pointer hover:text-primary transition-colors" />
-          <Sun size={22} className="cursor-pointer hover:text-primary transition-colors" />
-          <Rss size={22} className="cursor-pointer hover:text-primary transition-colors" />
-          <Twitter size={22} className="cursor-pointer hover:text-primary transition-colors" />
-          <Github size={22} className="cursor-pointer hover:text-primary transition-colors" />
-          <Linkedin size={22} className="cursor-pointer hover:text-primary transition-colors" />
-        </div>
-
-        <div className="text-xs text-white/40 font-sans leading-relaxed">
-          <p className="mb-2">© 2026-present Data Alchemy. All Rights Reserved.</p>
-          <div className="flex gap-4">
-            <span className="underline cursor-pointer hover:text-primary">Terms of Use</span>
-            <span className="underline cursor-pointer hover:text-primary">Privacy Policy</span>
-            <span className="underline cursor-pointer hover:text-primary">Code of Conduct</span>
+        {/* Existing Footer Links */}
+        <div className="flex flex-col md:flex-row justify-between items-center gap-6 border-t border-text-darker/30 pt-6">
+          <div className="font-heading font-medium text-text-main/60">Data Alchemist © {new Date().getFullYear()}</div>
+          <div className="flex gap-6">
+            <a href="https://www.linkedin.com/in/pawelprusko/" target="_blank" rel="noopener noreferrer" className="font-mono text-sm text-text-muted hover:text-text-main transition-colors">LinkedIn</a>
           </div>
         </div>
       </div>
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-8 pb-[max(env(safe-area-inset-bottom),_1rem)] left-1/2 -translate-x-1/2 z-50">
+          <div className="bg-[#1a1b1e] border border-text-darker shadow-xl px-5 py-3 rounded-sm flex items-center gap-3 animate-fade-in">
+            <span className="w-2 h-2 rounded-full bg-secondary"></span>
+            <span className="font-mono text-xs text-text-main tracking-wide uppercase whitespace-nowrap">{toastMessage}</span>
+          </div>
+        </div>
+      )}
     </footer>
   );
 }
