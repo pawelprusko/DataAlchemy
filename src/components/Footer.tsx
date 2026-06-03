@@ -100,7 +100,7 @@ export default function Footer() {
               <div className="flex flex-col gap-3">
                 <h3 className="font-heading font-medium text-text-main text-lg">Weekly Alerts</h3>
                 <p className="text-[15px] font-sans text-text-muted leading-relaxed">
-                  Would you like to be notified when a new article is published? I publish exactly once a week. You will receive one direct notification, nothing more.
+                  Would you like to be notified when a new article is published? I publish exactly once a week. You will receive one direct notification, nothing more. Cancel anytime right here.
                 </p>
                 
                 <button 
