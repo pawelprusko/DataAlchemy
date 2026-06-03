@@ -112,7 +112,7 @@ export default function Home() {
           <h2 className="text-xs font-mono tracking-widest text-text-muted mb-6 uppercase">
             Article Genres
           </h2>
-          <div className="flex flex-col divide-y divide-text-darker/40 border-y border-text-darker/40">
+          <div className="flex flex-col divide-y divide-text-darker/40 border-t border-text-darker/40">
             {CATEGORIES.map((cat) => {
               const isExpanded = expandedCategory === cat.id;
               return (
@@ -156,12 +156,18 @@ export default function Home() {
 
         {/* Section 6: Services (Anti-Sales) */}
         <section id="about" className="mb-0">
+          <h2 className="text-xs font-mono tracking-widest text-text-muted mb-6 uppercase">
+            Practice
+          </h2>
           <div className="text-text-muted font-sans leading-relaxed text-[15px]">
             <p className="mb-4">
               I help enterprises protect corporate BI budgets and eliminate cognitive noise by validating data logic before engineering begins. My practice bridges the final millimeter where machine logic meets human cognition through Data Experience Architecture.
             </p>
-            <p>
+            <p className="mb-4">
               Available for selective, high-stakes collaborations: architectural audits, infrastructure consultations, and direct logic validation via <strong className="text-text-main font-semibold">Vibe Prototyping</strong>.
+            </p>
+            <p>
+              I operate without sales funnels or intermediaries. If your system is inducing strategic friction, reach my personal inbox at <a href="mailto:pruskopawel@gmail.com" className="text-text-main font-semibold underline hover:text-secondary transition-colors">pruskopawel@gmail.com</a> or connect directly on <a href="https://www.linkedin.com/in/pawelprusko/" target="_blank" rel="noopener noreferrer" className="text-text-main font-semibold underline hover:text-secondary transition-colors">LinkedIn</a>.
             </p>
           </div>
         </section>
