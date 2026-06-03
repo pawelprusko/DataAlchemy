@@ -72,7 +72,7 @@ export default function Footer() {
              className="w-full text-left flex flex-col gap-2 focus:outline-none"
           >
              <div className="flex justify-between items-center w-full">
-                <span className="font-heading tracking-widest text-xs uppercase text-secondary">App & Notifications</span>
+                <span className="font-heading tracking-widest text-xs uppercase text-secondary">Focus & News</span>
                 <span className="text-text-muted font-mono">{expanded ? '−' : '+'}</span>
              </div>
              {!expanded && (
@@ -88,7 +88,7 @@ export default function Footer() {
               <div className="flex flex-col gap-3">
                 <h3 className="font-heading font-medium text-text-main text-lg">Launch from your Home Screen</h3>
                 <p className="text-[15px] font-sans text-text-muted leading-relaxed">
-                  Bypass the browser entirely. Saving the app opens Data Alchemist instantly in a distraction-free, full-screen mode.
+                  Skip the browser entirely. Saving the app opens Data Alchemist instantly in a distraction-free, full-screen mode.
                 </p>
                 <ul className="text-sm font-mono text-text-muted mt-2 space-y-2 list-none">
                   <li className="flex gap-2"><span className="text-secondary">-</span> iOS: Tap the Share icon in Safari, then select Add to Home Screen.</li>
@@ -98,7 +98,7 @@ export default function Footer() {
 
               {/* Section B: Notifications */}
               <div className="flex flex-col gap-3">
-                <h3 className="font-heading font-medium text-text-main text-lg">Weekly Alerts</h3>
+                <h3 className="font-heading font-medium text-text-main text-lg">Weekly Articles</h3>
                 <p className="text-[15px] font-sans text-text-muted leading-relaxed">
                   Would you like to be notified when a new article is published? I publish exactly once a week. You will receive one direct notification, nothing more. Cancel anytime right here.
                 </p>
