@@ -76,7 +76,7 @@ export default function Footer() {
                 <span className="text-text-muted font-mono">{expanded ? '−' : '+'}</span>
              </div>
              {!expanded && (
-               <p className="text-[15px] font-sans text-text-muted leading-relaxed mt-2">
+               <p className="text-[15px] font-sans text-text-main leading-relaxed mt-2">
                  Read Data Alchemist in full-screen mode and get a single alert when the weekly article drops. No browser clutter, zero spam.
                </p>
              )}
