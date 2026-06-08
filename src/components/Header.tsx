@@ -35,12 +35,6 @@ export default function Header({ categoryTitle }: { categoryTitle?: string }) {
             Data Alchemist
           </div>
         </Link>
-        
-        <div className={`flex items-center transition-opacity duration-300 ${showDynamicTitle ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}>
-          <a href="/#about" className="text-sm font-sans font-medium text-text-main/60 hover:text-text-main transition-colors">
-            About Me
-          </a>
-        </div>
       </div>
     </header>
   );
