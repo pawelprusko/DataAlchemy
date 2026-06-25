@@ -9,6 +9,8 @@ import Home from './pages/Home';
 import ArticleView from './pages/ArticleView';
 import ScrollToTop from './components/ScrollToTop';
 
+import { Analytics } from '@vercel/analytics/react';
+
 export default function App() {
   useEffect(() => {
       // [FIX] Hack układu naprawiający błędy mobilnego Safe Area / 100vh
@@ -43,6 +45,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/article/:categoryId/:slug" element={<ArticleView />} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }
