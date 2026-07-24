@@ -32,6 +32,14 @@ export default function Home() {
       <Header />
 
       <main className="max-w-3xl mx-auto px-6 pt-16 pb-20">
+        {/* Section 0: Author */}
+        <section className="mb-12">
+          <h2 className="text-xs font-mono tracking-widest text-text-main mb-4 uppercase">Author</h2>
+          <div className="text-sm text-text-main font-mono leading-relaxed">
+           Paweł Prusko, Data Experience Architect helping data-driven organizations eliminate cognitive noise and build high-resonance, human-centered Data Brands.
+          </div>
+        </section>
+
         {/* Section 1: Current Focus Log */}
         <section className="mb-12">
           <h2 className="text-xs font-mono tracking-widest text-text-muted mb-4 uppercase">Projects Status</h2>
@@ -162,10 +170,10 @@ export default function Home() {
           </h2>
           <div className="text-text-muted font-sans leading-relaxed text-[15px]">
             <p className="mb-4">
-              I help enterprises protect corporate BI budgets and eliminate cognitive noise by validating data logic before engineering begins. My practice bridges the final millimeter where machine logic meets human cognition through Data Experience Architecture.
+              I help enterprises architect high-resonance Data Brands, protect corporate BI budgets and eliminate cognitive noise by validating data logic before engineering begins. My practice bridges the final millimeter where machine logic meets human cognition through Data Experience Architecture.
             </p>
             <p className="mb-4">
-              Available for selective, high-stakes collaborations: architectural audits, infrastructure consultations, and direct logic validation via <strong className="text-text-main font-semibold">Vibe Prototyping</strong>.
+              Available for selective, high-stakes collaborations: Data Brand positioning, architectural audits, infrastructure consultations, and direct logic validation via <strong className="text-text-main font-semibold">Vibe Prototyping</strong>.
             </p>
             <p>
               I operate without sales funnels or intermediaries. If your system is inducing strategic friction, reach my personal inbox at <a href="mailto:pruskopawel@gmail.com" className="text-text-main font-semibold underline hover:text-secondary transition-colors">pruskopawel@gmail.com</a> or connect directly on <a href="https://www.linkedin.com/in/pawelprusko/" target="_blank" rel="noopener noreferrer" className="text-text-main font-semibold underline hover:text-secondary transition-colors">LinkedIn</a>.
